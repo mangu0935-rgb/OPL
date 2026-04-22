@@ -1,0 +1,634 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  :root {
+    --background: 210 40% 99%;
+    --foreground: 222.2 84% 4.9%;
+
+    --brand-navy: 215 60% 17%;
+    --brand-navy-deep: 217 64% 13%;
+    --brand-blue: 217 91% 50%;
+    --brand-blue-light: 210 90% 75%;
+    --brand-accent: 25 95% 55%;
+    --surface-muted: 215 35% 97%;
+    --surface-elevated: 0 0% 100%;
+
+    --gradient-brand: linear-gradient(135deg, hsl(217 91% 50%) 0%, hsl(222 80% 35%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(215 35% 97%) 100%);
+    --gradient-header: linear-gradient(180deg, hsl(0 0% 100% / 0.85) 0%, hsl(0 0% 100% / 0.65) 100%);
+    --shadow-elegant: 0 1px 0 0 hsl(var(--border) / 0.6), 0 8px 24px -12px hsl(217 91% 35% / 0.15);
+    --shadow-glow: 0 0 0 1px hsl(217 91% 50% / 0.08), 0 8px 28px -8px hsl(217 91% 50% / 0.25);
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 217 91% 50%;
+
+    --radius: 0.625rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 25% 27%;
+    --sidebar-primary: 217 91% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 91% 96%;
+    --sidebar-accent-foreground: 217 91% 30%;
+    --sidebar-border: 214 31% 91%;
+    --sidebar-ring: 217 91% 50%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --brand-navy: 210 40% 96%;
+    --brand-navy-deep: 215 30% 88%;
+    --brand-blue: 217 91% 62%;
+    --brand-blue-light: 210 90% 70%;
+    --brand-accent: 25 95% 60%;
+    --surface-muted: 222 40% 9%;
+
+    --card: 222 40% 9%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 40% 9%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 14%;
+    --muted-foreground: 215 20% 70%;
+
+    --accent: 217 32% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 30% 18%;
+    --input: 217 30% 18%;
+    --ring: 217 91% 62%;
+
+    --sidebar-background: 222 45% 8%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 32% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 217 30% 18%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+    letter-spacing: -0.015em;
+  }
+}
+
+@layer components {
+  .card-premium {
+    @apply relative overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300;
+    background-image: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--surface-muted)) 100%);
+    box-shadow:
+      0 1px 0 0 hsl(var(--border) / 0.5),
+      0 1px 2px 0 hsl(220 40% 20% / 0.04),
+      0 12px 32px -16px hsl(220 40% 20% / 0.10);
+  }
+  .card-premium:hover {
+    border-color: hsl(var(--brand-blue) / 0.25);
+    box-shadow:
+      0 1px 0 0 hsl(var(--border) / 0.5),
+      0 4px 10px 0 hsl(220 40% 20% / 0.06),
+      0 24px 48px -20px hsl(217 91% 35% / 0.22);
+    transform: translateY(-2px);
+  }
+  .card-premium::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--brand-blue) / 0.55), transparent);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ring-1;
+  }
+  .pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: currentColor;
+    display: inline-block;
+    box-shadow: 0 0 0 3px hsl(0 0% 100% / 0.5);
+  }
+
+  .table-premium thead th {
+    @apply bg-gradient-to-b from-muted/70 to-muted/40 text-[11px] font-bold uppercase tracking-[0.1em] text-muted-foreground;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  .table-premium tbody tr {
+    @apply transition-all duration-150;
+  }
+  .table-premium tbody tr:hover {
+    background: linear-gradient(90deg, hsl(var(--brand-blue) / 0.06), hsl(var(--brand-blue) / 0.01));
+    box-shadow: inset 3px 0 0 0 hsl(var(--brand-blue));
+  }
+  .table-premium tbody tr:nth-child(even) {
+    background-color: hsl(var(--surface-muted) / 0.4);
+  }
+  .table-premium tbody tr:nth-child(even):hover {
+    background: linear-gradient(90deg, hsl(var(--brand-blue) / 0.08), hsl(var(--brand-blue) / 0.02));
+  }
+
+  .section-title {
+    @apply relative pl-3.5 text-base font-bold text-brand-navy;
+  }
+  .section-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 18px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, hsl(var(--brand-blue)), hsl(var(--brand-blue) / 0.3));
+    box-shadow: 0 2px 8px -1px hsl(var(--brand-blue) / 0.5);
+  }
+
+  .glass-header {
+    background: var(--gradient-header);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+  }
+
+  /* ============================================================
+     Unified premium button system
+     - All variants share: h-10, rounded-lg, font-bold, smooth transition,
+       consistent focus-ring, subtle lift on hover, press-down on active.
+     - row-action-btn is a compact sibling (h-8) with the same finish.
+     ============================================================ */
+  .btn-premium {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-bold text-white transition-all duration-200;
+    background: linear-gradient(135deg, hsl(var(--brand-blue)) 0%, hsl(222 80% 42%) 100%);
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.18) inset,
+      0 -1px 0 0 hsl(217 91% 30% / 0.45) inset,
+      0 8px 20px -8px hsl(217 91% 50% / 0.55),
+      0 0 0 1px hsl(217 91% 60% / 0.3);
+  }
+  .btn-premium:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.22) inset,
+      0 -1px 0 0 hsl(217 91% 30% / 0.45) inset,
+      0 12px 28px -8px hsl(217 91% 50% / 0.7),
+      0 0 0 1px hsl(217 91% 65% / 0.45);
+  }
+  .btn-premium:active { transform: translateY(0); }
+  .btn-premium:focus-visible {
+    outline: none;
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.22) inset,
+      0 0 0 3px hsl(var(--brand-blue) / 0.35);
+  }
+
+  .btn-ghost-premium {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-input bg-card px-4 text-sm font-bold text-brand-navy transition-all duration-200;
+    box-shadow: 0 1px 2px 0 hsl(220 40% 20% / 0.04);
+  }
+  .btn-ghost-premium:hover {
+    border-color: hsl(var(--brand-blue) / 0.45);
+    background: hsl(var(--brand-blue) / 0.05);
+    color: hsl(var(--brand-blue));
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -10px hsl(217 91% 50% / 0.25);
+  }
+  .btn-ghost-premium:active { transform: translateY(0); }
+  .btn-ghost-premium:focus-visible {
+    outline: none;
+    border-color: hsl(var(--brand-blue));
+    box-shadow: 0 0 0 3px hsl(var(--brand-blue) / 0.18);
+  }
+
+  .input-premium {
+    @apply h-10 w-full rounded-lg border border-input bg-background px-3 text-sm transition-all duration-200;
+  }
+  .input-premium:focus {
+    @apply border-brand-blue outline-none;
+    box-shadow: 0 0 0 3px hsl(var(--brand-blue) / 0.12);
+  }
+
+  .row-action-btn {
+    @apply inline-flex h-8 items-center justify-center gap-1.5 rounded-lg border border-transparent px-3 text-xs font-bold text-brand-blue transition-all duration-200;
+  }
+  .row-action-btn:hover {
+    background: hsl(var(--brand-blue) / 0.1);
+    border-color: hsl(var(--brand-blue) / 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px -6px hsl(217 91% 50% / 0.3);
+  }
+  .row-action-btn:active { transform: translateY(0); }
+  .row-action-btn:focus-visible {
+    outline: none;
+    border-color: hsl(var(--brand-blue));
+    box-shadow: 0 0 0 3px hsl(var(--brand-blue) / 0.2);
+  }
+  /* Destructive row-action variant — same shape, different color */
+  .row-action-btn--danger {
+    color: hsl(var(--destructive));
+  }
+  .row-action-btn--danger:hover {
+    background: hsl(var(--destructive) / 0.08);
+    border-color: hsl(var(--destructive) / 0.3);
+    box-shadow: 0 6px 14px -6px hsl(var(--destructive) / 0.3);
+  }
+  .row-action-btn--danger:focus-visible {
+    border-color: hsl(var(--destructive));
+    box-shadow: 0 0 0 3px hsl(var(--destructive) / 0.2);
+  }
+
+  /* ============================================================
+     Format-picker tile (Excel/PDF download options).
+     Forces a WHITE background + navy text in BOTH light and dark
+     mode so the export options remain readable when the rest of
+     the app is dark. Uses `!important` to defeat any cascading
+     dark-theme tokens (incl. when the OS prefers dark).
+     ============================================================ */
+  .btn-format-light {
+    @apply flex flex-col items-center justify-center gap-2 rounded-lg p-4 text-sm font-bold transition-all duration-200;
+    background-color: #ffffff !important;
+    color: hsl(var(--brand-navy)) !important;
+    border: 1px solid hsl(220 13% 88%) !important;
+    color-scheme: light;
+  }
+  .btn-format-light:hover {
+    background-color: #ffffff !important;
+    border-color: hsl(var(--brand-blue)) !important;
+    box-shadow: 0 8px 20px -10px hsl(217 91% 50% / 0.35);
+    transform: translateY(-1px);
+  }
+  .btn-format-light:focus-visible {
+    outline: none;
+    border-color: hsl(var(--brand-blue)) !important;
+    box-shadow: 0 0 0 3px hsl(var(--brand-blue) / 0.25);
+  }
+
+  /* ===== Premium landing utilities ===== */
+  .lp-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] backdrop-blur;
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.12), hsl(0 0% 100% / 0.04));
+    color: hsl(0 0% 100% / 0.9);
+    border: 1px solid hsl(0 0% 100% / 0.18);
+    box-shadow: 0 1px 0 0 hsl(0 0% 100% / 0.08) inset, 0 8px 24px -16px hsl(217 91% 50% / 0.6);
+  }
+  .lp-chip-light {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em];
+    background: linear-gradient(135deg, hsl(var(--brand-blue) / 0.12), hsl(var(--brand-blue) / 0.04));
+    color: hsl(var(--brand-blue));
+    border: 1px solid hsl(var(--brand-blue) / 0.22);
+  }
+
+  .lp-cta-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-bold text-white transition-all duration-300;
+    background: linear-gradient(135deg, hsl(217 91% 58%) 0%, hsl(222 80% 42%) 100%);
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.18) inset,
+      0 -1px 0 0 hsl(217 91% 30% / 0.5) inset,
+      0 12px 28px -10px hsl(217 91% 45% / 0.6),
+      0 0 0 1px hsl(217 91% 60% / 0.35);
+  }
+  .lp-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.22) inset,
+      0 -1px 0 0 hsl(217 91% 30% / 0.5) inset,
+      0 18px 36px -12px hsl(217 91% 45% / 0.75),
+      0 0 0 1px hsl(217 91% 65% / 0.5);
+  }
+  .lp-cta-primary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px hsl(0 0% 100% / 0.45), 0 12px 28px -10px hsl(217 91% 45% / 0.6);
+  }
+  .lp-cta-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-bold text-white transition-all duration-300;
+    background: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.02));
+    border: 1px solid hsl(0 0% 100% / 0.35);
+    backdrop-filter: blur(8px);
+  }
+  .lp-cta-ghost:hover {
+    border-color: hsl(0 0% 100% / 0.7);
+    background: hsl(0 0% 100% / 0.12);
+    transform: translateY(-2px);
+  }
+  .lp-cta-ghost:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px hsl(0 0% 100% / 0.35);
+  }
+
+  .lp-feature-card {
+    @apply relative overflow-hidden rounded-2xl bg-card p-7 transition-all duration-500;
+    border: 1px solid hsl(var(--border) / 0.7);
+    background-image: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--surface-muted) / 0.6) 100%);
+    box-shadow:
+      0 1px 0 0 hsl(var(--border) / 0.5),
+      0 1px 2px 0 hsl(220 40% 20% / 0.04),
+      0 16px 40px -24px hsl(220 40% 20% / 0.12);
+  }
+  .lp-feature-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--brand-blue) / 0.55), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .lp-feature-card::after {
+    content: "";
+    position: absolute;
+    inset: -40% -10% auto auto;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, hsl(var(--brand-blue) / 0.18), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+    transform: translate(20px, -20px);
+  }
+  .lp-feature-card:hover {
+    transform: translateY(-4px);
+    border-color: hsl(var(--brand-blue) / 0.35);
+    box-shadow:
+      0 1px 0 0 hsl(var(--border) / 0.5),
+      0 4px 12px -2px hsl(220 40% 20% / 0.06),
+      0 30px 60px -20px hsl(217 91% 35% / 0.28);
+  }
+  .lp-feature-card:hover::before { opacity: 1; }
+  .lp-feature-card:hover::after { opacity: 1; transform: translate(0, 0); }
+
+  .lp-step-card {
+    @apply relative overflow-hidden rounded-2xl bg-card p-7 transition-all duration-300;
+    border: 1px solid hsl(var(--border) / 0.7);
+    background-image: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--surface-muted) / 0.5) 100%);
+    box-shadow: 0 1px 2px 0 hsl(220 40% 20% / 0.04), 0 12px 28px -18px hsl(220 40% 20% / 0.12);
+  }
+  .lp-step-card:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--brand-blue) / 0.3);
+    box-shadow: 0 1px 2px 0 hsl(220 40% 20% / 0.04), 0 20px 40px -18px hsl(217 91% 35% / 0.22);
+  }
+
+  .lp-faq-item {
+    @apply overflow-hidden rounded-xl bg-card px-5 transition-all duration-300;
+    border: 1px solid hsl(var(--border) / 0.7);
+    box-shadow: 0 1px 2px 0 hsl(220 40% 20% / 0.04), 0 6px 16px -10px hsl(220 40% 20% / 0.08);
+  }
+  .lp-faq-item:hover {
+    border-color: hsl(var(--brand-blue) / 0.3);
+    box-shadow: 0 1px 2px 0 hsl(220 40% 20% / 0.04), 0 14px 30px -14px hsl(217 91% 35% / 0.18);
+  }
+  .lp-faq-item[data-state="open"] {
+    border-color: hsl(var(--brand-blue) / 0.4);
+    background-image: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--brand-blue) / 0.04) 100%);
+    box-shadow: 0 1px 2px 0 hsl(220 40% 20% / 0.04), 0 18px 36px -16px hsl(217 91% 35% / 0.22);
+  }
+}
+
+
+@media print {
+  @page {
+    size: A4;
+    /* Top margin must clear the fixed print-logo (top:7mm + height:10mm + safety) */
+    margin: 26mm 14mm 18mm 14mm;
+
+    @top-center {
+      content: "BRI Finance — OPL Terpadu";
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      color: #0f1f3d;
+      letter-spacing: 1px;
+    }
+    @top-right {
+      content: "Dashboard Report — " string(report-date);
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      color: #5a6781;
+    }
+    @bottom-center {
+      content: "Halaman " counter(page) " dari " counter(pages);
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      color: #5a6781;
+    }
+    @bottom-right {
+      content: "Confidential";
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 8pt;
+      color: #b45309;
+      font-weight: 700;
+    }
+  }
+
+  /* Element that supplies the dynamic date to @top-right via string-set */
+  .print-date {
+    string-set: report-date content();
+    position: absolute;
+    left: -9999px;
+  }
+
+  /* FORCE LIGHT THEME for printing/PDF — overrides .dark mode tokens */
+  :root, .dark {
+    --background: 0 0% 100% !important;
+    --foreground: 222.2 84% 4.9% !important;
+    --card: 0 0% 100% !important;
+    --card-foreground: 222.2 84% 4.9% !important;
+    --popover: 0 0% 100% !important;
+    --popover-foreground: 222.2 84% 4.9% !important;
+    --muted: 210 40% 96.1% !important;
+    --muted-foreground: 215.4 16.3% 46.9% !important;
+    --border: 214.3 31.8% 91.4% !important;
+    --surface-muted: 215 35% 97% !important;
+    --brand-navy: 215 60% 17% !important;
+    --brand-blue: 217 91% 50% !important;
+  }
+  html, body { background: #fff !important; color: #0f1f3d !important; color-scheme: light !important; }
+  [data-sidebar], aside, .no-print, .print-actions-col, .print-pagination { display: none !important; }
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    position: relative !important;
+  }
+  [data-print-section], .rounded-xl, .rounded-2xl, .recharts-wrapper, table, thead, tbody, tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  [data-print-section] {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10mm !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  /* Force responsive grids to keep their lg: layout when printing,
+     since print media uses a narrow page width that collapses Tailwind's lg: breakpoint. */
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  .lg\:col-span-2 { grid-column: span 2 / span 2 !important; }
+  .lg\:col-span-3 { grid-column: span 3 / span 3 !important; }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  /* Distribusi chart inner grid: chart + legend side-by-side */
+  .lg\:grid-cols-\[minmax\(0\,1fr\)_240px\] { grid-template-columns: minmax(0, 1fr) 240px !important; }
+  button:not(.print-keep) { display: none !important; }
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  .print-logo {
+    display: block !important;
+    position: fixed;
+    top: 7mm;
+    left: 12mm;
+    height: 10mm;
+    width: auto;
+    max-width: 44mm;
+    object-fit: contain;
+    z-index: 4;
+    background: #fff;
+  }
+
+  .print-watermark {
+    display: flex !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .print-watermark img {
+    width: 90mm;
+    max-width: 50vw;
+    opacity: 0.05;
+    transform: rotate(-22deg);
+    filter: grayscale(100%);
+    display: block;
+  }
+
+  main > *:not(.print-logo):not(.print-watermark) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .print-offset-top {
+    margin-top: 16mm !important;
+  }
+
+  /* ============================================================
+     Universal header-clearance guard.
+     The fixed .print-logo sits at top:7mm with height:10mm, so it
+     occupies roughly the first 17mm of every printed page. To
+     guarantee the logo never overlaps the chart/heading on ANY
+     paper size (A4, Letter, Legal, A5, etc.) we:
+       1. Reserve safe top padding on <main> itself.
+       2. Force the first printable section to start below the logo.
+       3. Apply the same clearance to common chart wrappers so a
+          chart that happens to be the first element is also safe.
+  ============================================================ */
+  main {
+    padding-top: 20mm !important;
+  }
+  main > [data-print-section]:first-of-type,
+  main > *:first-child {
+    margin-top: 0 !important;
+  }
+  /* Any chart container near the top of a page gets a safety gap so
+     the fixed logo never lands on top of it, regardless of paper size. */
+  .recharts-wrapper,
+  .recharts-responsive-container {
+    margin-top: 4mm;
+  }
+
+  /* Pie chart cetak: sembunyikan tooltip interaktif & buat legend
+     wrap sehingga nama merek panjang tidak terpotong di PDF. */
+  .recharts-tooltip-wrapper { display: none !important; }
+  .print-pie-legend {
+    max-height: none !important;
+    overflow: visible !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 4px 12px !important;
+  }
+  .print-pie-legend button {
+    display: flex !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 2px 0 !important;
+  }
+  .print-pie-legend button > span {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+}
+
+.print-logo, .print-watermark { display: none; }
+
